@@ -86,5 +86,17 @@ $\{ x\#y \mid x,y \in \{0,1\}^{\star}, x \neq y \}$
 
 # Ex 2 Grammatiche ambigue
 
+Considerate la seguente grammatica
+
+S $\rightarrow$
+
+1. Dimostrare che la grammatica e' ambigua
+2. Modificare la grammatica per rimuovere l'ambiguita'
+
+## Dimost
+
+Per dimostrare che una grammatica e' ambigua basta trovare una parola con alberi o derivazioni 
+
+
 
 # Ex 3 Forma normali
