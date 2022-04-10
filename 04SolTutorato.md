@@ -138,36 +138,36 @@ S $\rightarrow$ Open $\rightarrow$ If cond then S $\rightarrow$ if cond then Clo
 
 Convertire in forma normale la seguente grammatica
 
-A -> BAB|B|$\epsilon$
-B -> 00|$\epsilon$
+A $\rightarrow$ BAB|B|$\epsilon$  
+B $\rightarrow$ 00|$\epsilon$  
 
 **Passo 1** Aggiungere variabile inizale
 La variabile iniziale A e' presente anche a destra, quindi dobbiamo aggiungere una nuova variable iniziale.
 
-S -> A
-A -> BAB|B|$\epsilon$
-B -> 00|$\epsilon$
+S $\rightarrow$ A  
+A $\rightarrow$ BAB|B|$\epsilon$  
+B $\rightarrow$ 00|$\epsilon$  
 
-NB
+Questo passo e' necessario solo se la variable iniziale compare a destra di qualche produzione. 
 
 **Passo 2** Rimuovere regole $\epsilon$ 
 
-A -> $\epsilon$
+A $\rightarrow$ $\epsilon$
 
 Aggiungiamo la produzione $\epsilon$ alla variabile iniziale S. Possiamo farlo perche' la forma normale di Chomsky ammetta la $\epsilon$ per la variabile iniziale.
 
-S -> A|$\epsilon$
-A -> BAB|B|
-B -> 00|$\epsilon$
+S $\rightarrow$ A|$\epsilon$  
+A $\rightarrow$ BAB|B|  
+B $\rightarrow$ 00|$\epsilon$  
 
 
-B -> $\epsilon$
+B $\rightarrow$ $\epsilon$
 
 Ora rimuoviamo la $\epsilon$ per la B. Dato che abbiamo la produzione BAB, dobbiamo considerare tre possibili casi, BA, AB, A.
 
-S -> A|$\epsilon$
-A -> BAB|B|BA|AB|A
-B -> 00
+S $\rightarrow$ A|$\epsilon$  
+A $\rightarrow$ BAB|B|BA|AB|A  
+B $\rightarrow$ 00  
 
 Attenzione! Abbiamo eliminato la produzione A -> $\epsilon$ al passo precedente, quindi **non** dobbiamo aggiungerla.
 
@@ -177,19 +177,19 @@ Abbiamo tre regole unitarie da eliminiare
 
 Possiamo eliminiare A-> A perche' e' una regola ciclica (non produce nulla) e sostituiamo 00 al posto di B nella produzione di A. Fatto questo, rimuoviamo la regola unitaria da S.
 
-S -> BAB|00|BA|AB|$\epsilon$  
-A -> BAB|00|BA|AB  
-B -> 00  
+S $\rightarrow$ BAB|00|BA|AB|$\epsilon$  
+A $\rightarrow$ BAB|00|BA|AB  
+B $\rightarrow$ 00  
 
 
 **Passo 4** Conversione regole finali
 
 Abbiamo una produzione con tre variabili a destra della freccia, introduciamo una nuova produzione per avere solo due variabli a destra.
 
-S -> CB|00|BA|AB|$\epsilon$  
-A -> CB|00|BA|AB  
-B -> 00  
-C -> BA
+S $\rightarrow$ CB|00|BA|AB|$\epsilon$  
+A $\rightarrow$ CB|00|BA|AB  
+B $\rightarrow$ 00  
+C $\rightarrow$ BA
 
 
 
