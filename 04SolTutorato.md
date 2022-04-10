@@ -3,11 +3,6 @@ title: Soluzioni Tutorato 4
 author: Giulio Umbrella
 ---
 
-## [Opzionale]
-
-1. a elevvanto alla n quaddro
-2. 
-
 # Ex 1 Grammatiche libere da contesto
 
 Definire delle gramatiche libere da contesto per i seguenti linguaggi
@@ -40,8 +35,6 @@ Le produzioni sono le seguenti:
 $S\rightarrow$ PSP | DSD| 0  
 $P\rightarrow 00|01|10|11|\epsilon$  
 $D\rightarrow 0|1|0P|1P$  
-
-
 
 ## Ex 1.2
 
@@ -128,17 +121,79 @@ Per rimuovere l'ambiguita', dobbiamo modificarne le regole. Introduciamo quindi 
 - **Open**: puo' produre un if senza corrispettivo else 
 - **Closed**: non ha nessun if oppure tutti gli if hanno un corrispettivo else
 
-
-
+Quindi modifichiamo le regole come segue:
 
 S $\rightarrow$ | Open | Closed  
 Open $\rightarrow$ if cond then S | if cond then Closed else Open  
 Closed $\rightarrow$ A |  if cond then Closed else Closed  
 A $\rightarrow$ a:=1   
 
+Possiamo vedere che tra un if e un else, possiamo aggiungere un if solo se aggiungiamo un corrispettivo else.
+
 Possiamo controllare la derivazione ottenuta in precedenza:
 
 S $\rightarrow$ Open $\rightarrow$ If cond then S $\rightarrow$ if cond then Closed $\rightarrow$ If cond then If cond then Closed If cond Closed $\rightarrow$ If cond if Cond A if cond Closed $\rightarrow$ If cond if Cond A if cond A
 
-
 # Ex 3 Forma normali
+
+Convertire in forma normale la seguente grammatica
+
+A -> BAB|B|$\epsilon$
+B -> 00|$\epsilon$
+
+**Passo 1** Aggiungere variabile inizale
+La variabile iniziale A e' presente anche a destra, quindi dobbiamo aggiungere una nuova variable iniziale.
+
+S -> A
+A -> BAB|B|$\epsilon$
+B -> 00|$\epsilon$
+
+NB
+
+**Passo 2** Rimuovere regole $\epsilon$ 
+
+A -> $\epsilon$
+
+Aggiungiamo la produzione $\epsilon$ alla variabile iniziale S. Possiamo farlo perche' la forma normale di Chomsky ammetta la $\epsilon$ per la variabile iniziale.
+
+S -> A|$\epsilon$
+A -> BAB|B|
+B -> 00|$\epsilon$
+
+
+B -> $\epsilon$
+
+Ora rimuoviamo la $\epsilon$ per la B. Dato che abbiamo la produzione BAB, dobbiamo considerare tre possibili casi, BA, AB, A.
+
+S -> A|$\epsilon$
+A -> BAB|B|BA|AB|A
+B -> 00
+
+Attenzione! Abbiamo eliminato la produzione A -> $\epsilon$ al passo precedente, quindi **non** dobbiamo aggiungerla.
+
+**Passo 3** Rimuovere regole unitarie
+
+Abbiamo tre regole unitarie da eliminiare
+
+Possiamo eliminiare A-> A perche' e' una regola ciclica (non produce nulla) e sostituiamo 00 al posto di B nella produzione di A. Fatto questo, rimuoviamo la regola unitaria da S.
+
+S -> BAB|00|BA|AB|$\epsilon$  
+A -> BAB|00|BA|AB  
+B -> 00  
+
+
+**Passo 4** Conversione regole finali
+
+Abbiamo una produzione con tre variabili a destra della freccia, introduciamo una nuova produzione per avere solo due variabli a destra.
+
+S -> CB|00|BA|AB|$\epsilon$  
+A -> CB|00|BA|AB  
+B -> 00  
+C -> BA
+
+
+
+
+
+
+
