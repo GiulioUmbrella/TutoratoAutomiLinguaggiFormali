@@ -16,7 +16,7 @@ Definire delle gramatiche libere da contesto per i seguenti linguaggi
 
 \{ w | la lunghezza di w e' dispari con all'interno il simbolo zero\}
 
-Data la parola w, possiamo dividerla nella concatenazione di tre componentti, w = Sx0Dx. 
+Data la parola w, possiamo dividerla nella concatenazione di tre componentti, w = Sx 0 Dx. 
 
 Per la somma di numeri pari e dispari sappiamo che valgono i seguenti
 
@@ -43,7 +43,7 @@ $D\rightarrow 0|1|0P|1P$
 
 
 
-## Ex 1.1
+## Ex 1.2
 
 $\{ w \mid  w = w^{R} \textrm{ ,w e' palindroma}\}$
 
@@ -51,7 +51,7 @@ Per ogni produzione, dobbiamo aggiungere lo stesso carattere a destra e a sinist
 
 $R\rightarrow 0R0|1R1|1|0| \epsilon$
 
-## Ex 1.2
+## Ex 1.3
 
 $\{ w\#x \mid w^{R} \textrm{ e' una sottostringa di x }  \}$
 
@@ -80,7 +80,7 @@ $X \rightarrow 0X| 1X| \epsilon$
 
 
 
-## Ex 1.3
+## Ex 1.4
 
 $\{ x\#y \mid x,y \in \{0,1\}^{\star}, x \neq y \}$
 
@@ -88,14 +88,31 @@ $\{ x\#y \mid x,y \in \{0,1\}^{\star}, x \neq y \}$
 
 Considerate la seguente grammatica
 
-S $\rightarrow$
+S $\rightarrow$ A | If-then | If-then-else  
+If-then $\rightarrow$ if cond then S  
+If-then-else $\rightarrow$ if cond then S else  
+A $\rightarrow$ a:=1  
 
-1. Dimostrare che la grammatica e' ambigua
-2. Modificare la grammatica per rimuovere l'ambiguita'
+**Ex1** Dimostrare che la grammatica e' ambigua  
+**Ex2** Modificare la grammatica per rimuovere l'ambiguita'  
 
-## Dimost
+## Ex 2.1 Dimostrare che la grammatica e' ambigua
 
-Per dimostrare che una grammatica e' ambigua basta trovare una parola con alberi o derivazioni 
+Per dimostrare chw una grammatica e' sufficiente tovar due derivazioni a sinistra che producono la stessa parola. Un possibile esempio e' il seguente:
+
+S $\rightarrow$ If-then $\rightarrow$ If cond then S $\rightarrow$ If cond then It-then-else $\rightarrow$ If cond then If cond then S else S
+
+S $\rightarrow$ If-then-else $\rightarrow$ If cond then S else S $\rightarrow$ If cond then If-then else S $\rightarrow$ If cond then If cond then S else S
+
+Per completare entrambe le derivazioni, sostituiamo S con A e poi inseriamo il terminale a:=1
+
+## Ex 2.2 Rimuovere ambiguita' da grammatica
+
+S -> | Open | Closed
+Open -> if cond S | if cond Closed else Open 
+Closed -> A |  if cond Closed else Closed
+A -> a:=1 
+
 
 
 
