@@ -192,8 +192,20 @@ B $\rightarrow$ 00
 C $\rightarrow$ BA
 
 
+## Ex 4 Esercizi aggiuntivi
 
+Convertire in forma normale le seguenti grammatiche
 
+### Ex 4.1
+
+S $\rightarrow$ aXbX  
+X $\rightarrow$ aY|bY$\epsilon$  
+Y $\rightarrow$ X|c  
+
+### Ex 4.2
+
+S $\rightarrow$ AbA  
+A $\rightarrow$ Aa|$\epsilon$
 
 
 
