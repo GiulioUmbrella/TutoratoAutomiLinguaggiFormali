@@ -100,20 +100,45 @@ A $\rightarrow$ a:=1
 
 Per dimostrare chw una grammatica e' sufficiente tovar due derivazioni a sinistra che producono la stessa parola. Un possibile esempio e' il seguente:
 
-S $\rightarrow$ If-then $\rightarrow$ If cond then S $\rightarrow$ If cond then It-then-else $\rightarrow$ If cond then If cond then S else S
+S $\rightarrow$ If-then $\rightarrow$ If cond then S $\rightarrow$ If cond then It-then-else $\rightarrow$  
+If cond then If cond then S else S
 
-S $\rightarrow$ If-then-else $\rightarrow$ If cond then S else S $\rightarrow$ If cond then If-then else S $\rightarrow$ If cond then If cond then S else S
+S $\rightarrow$ If-then-else $\rightarrow$ If cond then S else S $\rightarrow$ If cond then If-then else S $\rightarrow$  
+If cond then If cond then S else S
 
 Per completare entrambe le derivazioni, sostituiamo S con A e poi inseriamo il terminale a:=1
 
+Per illustrare il problema, possiamoo vedere che le due derivazioni possono essere interpreatate in due modi diversi:
+
+if (conditionA) {  
+	if (conditionB) statementA; else statementB;  
+}  
+
+oppure
+
+if (conditionA) {   
+	if (conditionB) statementA;  
+}  
+else statementB;   
+
 ## Ex 2.2 Rimuovere ambiguita' da grammatica
 
-S -> | Open | Closed
-Open -> if cond S | if cond Closed else Open 
-Closed -> A |  if cond Closed else Closed
-A -> a:=1 
+Per rimuovere l'ambiguita', dobbiamo modificarne le regole. Introduciamo quindi due diverse variabili che definiamo Open e Closed con le seguenti caratteristiche:
+
+- **Open**: puo' produre un if senza corrispettivo else 
+- **Closed**: non ha nessun if oppure tutti gli if hanno un corrispettivo else
 
 
+
+
+S $\rightarrow$ | Open | Closed  
+Open $\rightarrow$ if cond then S | if cond then Closed else Open  
+Closed $\rightarrow$ A |  if cond then Closed else Closed  
+A $\rightarrow$ a:=1   
+
+Possiamo controllare la derivazione ottenuta in precedenza:
+
+S $\rightarrow$ Open $\rightarrow$ If cond then S $\rightarrow$ if cond then Closed $\rightarrow$ If cond then If cond then Closed If cond Closed $\rightarrow$ If cond if Cond A if cond Closed $\rightarrow$ If cond if Cond A if cond A
 
 
 # Ex 3 Forma normali
