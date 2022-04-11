@@ -77,6 +77,13 @@ $X \rightarrow 0X| 1X| \epsilon$
 
 $\{ x\#y \mid x,y \in \{0,1\}^{\star}, x \neq y \}$
 
+S $\rightarrow$ A#B | B#A  
+A $\rightarrow$ TAT|0  
+B $\rightarrow$ TBT|1  
+T $\rightarrow$ 0|1  
+
+
+
 # Ex 2 Grammatiche ambigue
 
 Considerate la seguente grammatica
