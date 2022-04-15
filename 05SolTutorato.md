@@ -1,4 +1,4 @@
----
+--
 title: Soluzioni Tutorato 5
 author: Giulio Umbrella
 ---
@@ -83,7 +83,7 @@ Per la dimostrazione formale dobbiamo define i cinque elementi di un automa a st
 ### Funzione di transizione
 La funzione di transione e' definita nel seguente modo
 
-$\delta((x,y,A),a) = (\delta(x,a),y,B)$
+$\delta((x,y,A),a) = (\delta_{A}(x,a),y,B)$
 
 **Input**: la funzione prende input una tupla di tre valori e l'input corrent
 
@@ -96,7 +96,7 @@ $\delta((x,y,A),a) = (\delta(x,a),y,B)$
 - y stato corrente di $D_{B}$
 - B flag per indicare che l'input deve essere processato usando l'automa $D_{B}$
 
-Definiamo poi una funzione simile per i passaggi da B ad A $\delta((x,y,A),a) = (\delta(x,a),y,B)$.
+Definiamo poi una funzione simile per i passaggi da B ad A $\delta((x,y,B),b) = (x,\delta_{B}(y,b),A)$.
 
 Possiamo notare i seguenti punti:
 
@@ -127,6 +127,18 @@ F = $F_{A}$ x $F_{B}$ x {A}, l'automa accetta se entrambi gli stati sono accetta
 
 # Ex 3
 
-# Ex 4
- 
+Sia L un linguaggio regolare su un alfabeto $\Sigma$ con $\# \in \Sigma$ e sia dehash(w) la funzione che rimuove il simbolo hash dalla stringa. Ad esempio dehash(1#1) = 11, dehash(0#10#) = 010. Dimostrare che il linguaggio dehash(L) = $\{dehash(w): w \in L \}$ e' regolare.
 
+# Ex 4
+
+Sia L un linguaggio regolare su un alfabeto $\Sigma$. Dimostrare che il linguaggio suffixes(L) = $\{ y | xy \in L \textrm{per qualche stringa x} \in \Sigma^{\*}  \}$
+
+# Ex 5
+
+
+
+# Esercizi aggiuntivi
+
+1. Dimostrare che il linguaggio $\{ 0^{m}1^{n} | \textrm{n/m e' un numero intero} \}$ non e' regolare
+2. Siano L e M due linguaggi regolari su alfabeto {0,1}. Dimostare che il linguaggio L\&M = $\{x\&y | x \in L, y \in M, |x| = |y| \}$, dove x\&y e' l'and logic bit a bit. Per esempio, 101\&001 = 001.
+2. Siano L e M due linguaggi regolari su alfabeto {0,1}. Dimostare che il linguaggio $L XOR M = \{xXORy | x \in L, y \in M, |x| = |y| \}$, dove $xXOR y$ e' l'and logic bit a bit. Per esempio,$101XOR001 = 100$.
