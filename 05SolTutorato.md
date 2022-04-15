@@ -60,72 +60,69 @@ Questo esercizio va percio' affrontato in modo generale; sappiamo infatti solo c
 
 Sappiamo che A e B sono due linguaggi regolari quindi sappiamo che esistono due automi a stati finiti che li rappresentano. Attenzione, sappiamo che i due automi esistono, ma non abbiamo informazioni su cosa contengono.
 
-Dati i due automi DA e DB definiamo 
+Dati i due automi $D_{A}$ e $D_{B}$ definiamo 
 
-- DA = (QA, ,A ,qA,FA)
-- DB = (QB, ,B ,qB,FB)
+- $D_{A}$ = ($Q_{A}$, $\Sigma$ ,$\delta_{A}$ ,$q_{A}$,$F_{A}$)
+- $D_{B}$ = ($Q_{B}$, $\Sigma$ ,$\delta_{B}$ ,$q_{B}$,$F_{B}$)
 
-Utilizzando questi automi, costruiamo un automa DS che riconosce le parole composte dallo shuffle di due parole di A e B. Possiamo pensare che DS ha a disposizione DA e DB, quindi l'automa puo' richiamarne le funzioni di transizione. Sappiamo che nell'input i caratteri sono alternati fra la parola in A e quella in B.
+Utilizzando questi automi, costruiamo un automa $D_{S}$ che riconosce le parole composte dallo shuffle di due parole di A e B. Possiamo pensare che $D_{S}$ ha a disposizione $D_{A}$ e $D_{B}$, quindi l'automa puo' richiamarne le funzioni di transizione. Sappiamo che nell'input i caratteri sono alternati fra la parola in A e quella in B.
 
 L'ordine delle operazioni e' il seguente:
 
-1. 1L'automa DS parte dallo stato iniziale di A e B
-2. L'automa DS legge il primo input e richiama le funzioni di transizioni di DA e aggiorna lo stato, infatti sappiamo che il primo simbolo appartiene al linguaggio A ; in questa fase DB rimane allo stato iniziale
-3. Il secondo input per costruzione appartiene al linguaggio B; l'automa DS lascia DA immutato e aggiorna DB.
-4. La procedura riparte aggiornando DA
+1. L'automa $D_{S}$ parte dallo stato iniziale di A e B
+2. L'automa $D_{S}$ legge il primo input e richiama le funzioni di transizioni di $D_{A}$ e aggiorna lo stato, infatti sappiamo che il primo simbolo appartiene al linguaggio A ; in questa fase $D_{B}$ rimane allo stato iniziale
+3. Il secondo input per costruzione appartiene al linguaggio B; l'automa $D_{S}$ lascia $D_{A}$ immutato e aggiorna $D_{B}$.
+4. La procedura riparte aggiornando $D_{A}$
 
 In questo modo, le due parole di A e B vengono processate in parallelo ma in modo asincrono.  
 
 ## Dimostrazione formale
 
-Per la dimostrazione formale dobbiamo define i cinque elementi di un automa a stati finito. Possiamo assumere che l'alfabeto sia 
+Per la dimostrazione formale dobbiamo define i cinque elementi di un automa a stati finito. L'alfabeto $\Sigma$ e' lo stesso dei due automi.
 
 ### Funzione di transizione
 La funzione di transione e' definita nel seguente modo
 
-((x,y,A),a) = ((x,a),y,B)
+$\delta((x,y,A),a) = (\delta(x,a),y,B)$
 
 **Input**: la funzione prende input una tupla di tre valori e l'input corrent
 
-- x stato corrente di DA
-- y stato corrente di DB
-- A flag per indicare che l'input a deve essere processato usando DA
+- x stato corrente di $D_{A}$
+- y stato corrente di $D_{B}$
+- A flag per indicare che l'input a deve essere processato usando $D_{A}$
 
 **Output**: la funzione produce in output una tupla di tre elementi
-- (x,a) nuovo stato di DA a partire da x con input a
-- y stato corrente di DB
-- B flag per indicare che l'input deve essere processato usando l'automa DB
+- (x,a) nuovo stato di $D_{A}$ a partire da x con input a
+- y stato corrente di $D_{B}$
+- B flag per indicare che l'input deve essere processato usando l'automa $D_{B}$
 
-Definiam poi una funzione simile per 
+Definiamo poi una funzione simile per i passaggi da B ad A $\delta((x,y,A),a) = (\delta(x,a),y,B)$.
 
 Possiamo notare i seguenti punti:
 
-- La procedura aggiorna DA ma lascia immutato DB.
-- Il flag A viene cambiato in B per indicare che il prossimo input deve essere processato usando DB.
-- Il meccanismo della funzione di transione di DS e ' sempre lo stesso: la funzione prende in input uno stato  e simbolo e produce in output uno stato.
-- Gli stati di DS sono identificati da tuple di 3 elementi
+- La procedura aggiorna $D_{A}$ ma lascia immutato $D_{B} (o viceversa)$.
+- Il flag A viene cambiato in B per indicare che il prossimo input deve essere processato usando $D_{B}$.
+- Il meccanismo della funzione di transione di $D_{S}$ e ' sempre lo stesso: la funzione prende in input uno stato  e simbolo e produce in output uno stato.
+- Gli stati di $D_{S}$ sono identificati da tuple di 3 elementi
 
 ### Insieme di stati
 
-Per completare l'automa, dobbiamo definirne gli stati in input:
+Per completare l'automa, dobbiamo definirne gli stati:
 
-QS = QA x QB x {A,B}
+$Q_{S}$ = $Q_{A}$ x $Q_{B}$ x {A,B}
 
 **NB**: X e' il prodotto cartesiano fra insiemi, ossia l'insieme prodotto da tutte le coppie di singoli elementi. Ad esempio {a,b} X {c,d} = {{a,c), (a,d), (b,c), (b,d)}
+
+In questo modo stiamo creando tutte le possibili combinazioni di coppie di stati e flag. Non tutti gli stati saranno necessariamente percorsi, ma in questo modo stiamo creando tutte le possibili combinazioni di stati in cui possono essere A e B. 
 
 
 ### Stato iniziale 
 
-q = $(q_{A}, q_{B}, A), ossia gli automi vengono processati a partire dai loro rispetti stati iniziali, e il primo automa ad essere processato e' A. 
+q = $(q_{A}, q_{B}, A)$, ossia gli automi vengono processati a partire dai loro rispetti stati iniziali, e il primo automa ad essere processato e' A. 
 
 ### Stato accettante
 
-F = FA x FB x {A}, l'automa accetta se entrambi gli stati sono accettanti; il flag A serve ad indicare che il prossimo input e' dal linguaggio A, e quindi l'input letto in precedenza era da B. 
-
-
-
-
-Ora dobbiamo a
+F = $F_{A}$ x $F_{B}$ x {A}, l'automa accetta se entrambi gli stati sono accettanti; il flag A serve ad indicare che il prossimo input e' dal linguaggio A, e quindi l'input letto in precedenza era da B. 
 
 
 # Ex 3
